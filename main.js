@@ -31,7 +31,16 @@ class Drink{
         console.log('\n\nFood item: ' + this.name)
         console.log('\nDescription: ' + this.desc)
         console.log('\nPrice: ' + this.price)
-        console.log('\nFood Items ingredients: ' + this.FoodItem)
+        
+        var ingStr = ""
+        
+        // Stringify the list of FoodItem ingredients in the Plate array 
+        for(var i = 0; i < this.FoodItem.length; i++) {
+            if (i !== 0) { ingStr += ', ' } // Add comma between ingredients
+            ingStr += this.FoodItem[i].name 
+        }
+        
+        console.log (ingStr)
     }    
 }
 
@@ -47,7 +56,18 @@ class Plate{
         console.log('\n\nFood item: ' + this.name)
         console.log('\nDescription: ' + this.desc)
         console.log('\nPrice: ' + this.price)
-        console.log('\nFood Items ingredients: ' + this.FoodItem)
+        
+        console.log('\nFood Items ingredients: ')
+        
+        var ingStr = ""
+        
+        // Stringify the list of FoodItem ingredients in the Plate array 
+        for(var i = 0; i < this.FoodItem.length; i++) {
+            if (i !== 0) { ingStr += ', ' } // Add comma between ingredients
+            ingStr += this.FoodItem[i].name 
+        }
+        
+        console.log (ingStr)
     }    
     
     isVegan() {
@@ -82,6 +102,10 @@ class Menu {
     constructor(Plate) {
         this.Plate = Plate
     }
+    
+    stringify() {
+        this.Plate.forEach(function(){ Plate.stingify },this)
+    }
 }
 
 class Restaurant {
@@ -89,6 +113,13 @@ class Restaurant {
         this.name = name
         this.desc = desc
         this.Menu = Menu
+    }
+    
+    stringify() {
+        console.log('\n\nRestaurant Name: ' + this.name)
+        console.log('\nDescription: ' + this.desc)
+        
+        console.log('\nMenu: ') + this.Menu    
     }
 }
 
@@ -98,7 +129,9 @@ class Customer {
     }
 }
 
-var foodItem1 = new FoodItem(
+//========================================== START OF FOODITEM INGREDIENTS =======================================
+
+var foodRotChicken = new FoodItem(
     'Rotisserie Chicken', 
     180, 
     false, 
@@ -106,7 +139,7 @@ var foodItem1 = new FoodItem(
     true
 )
 
-var foodItem2 = new FoodItem(
+var foodSpicyChicken = new FoodItem(
     'Spicy Tikka Chicken', 
     120, 
     false, 
@@ -114,7 +147,7 @@ var foodItem2 = new FoodItem(
     true
 )
 
-var foodItem3 = new FoodItem(
+var foodFalafel = new FoodItem(
     'Falafel', 
     100, 
     true, 
@@ -122,7 +155,7 @@ var foodItem3 = new FoodItem(
     true
 )
 
-var foodItem4 = new FoodItem(
+var foodFeta = new FoodItem(
     'Feta Cheese', 
     120, 
     false, 
@@ -130,7 +163,7 @@ var foodItem4 = new FoodItem(
     true
 )
 
-var foodItem5 = new FoodItem(
+var foodLettace = new FoodItem(
     'Lettace', 
     100, 
     true, 
@@ -138,7 +171,7 @@ var foodItem5 = new FoodItem(
     true
 )
 
-var foodItem6 = new FoodItem(
+var foodTomato = new FoodItem(
     'Tomato', 
     100, 
     true, 
@@ -146,7 +179,7 @@ var foodItem6 = new FoodItem(
     true
 )
 
-var foodItem7 = new FoodItem(
+var foodLime = new FoodItem(
     'Lime', 
     5, 
     true, 
@@ -154,27 +187,110 @@ var foodItem7 = new FoodItem(
     false    
 )
 
-var drink1 = new Drink(
+var foodGroundBeef = new FoodItem(
+    'Ground Beef', 
+    220, 
+    false, 
+    true,
+    true    
+)
+
+var foodTortilla = new FoodItem(
+    'Wheat Tortilla', 
+    120, 
+    true, 
+    false,
+    true   
+)
+
+var foodAvocado = new FoodItem(
+    'Avocado', 
+    140, 
+    true, 
+    true,
+    false
+)
+
+var foodTequila = new FoodItem(
+    'Tequila', 
+    120, 
+    true, 
+    true,
+    true
+)
+
+//========================================== END OF FOODITEM INGREDIENTS =======================================
+
+
+//======= START OF PLATES AND DRINKS ===========================
+
+var plateVeganFalafelTaco = new Plate(
+    'Vegan Falafel Taco',
+    'Vegan taco with gluten-free almond-flour tortilla, lettace, tomato and falafel.',
+    6.95,
+    [foodFalafel,foodFeta,foodLettace,foodTomato]
+)
+
+// Burrito Plate
+var plateBurrito = new Plate(
+    'Beef Burrito',
+    'A traditional ground beef burrito plate.',
+    8.95,
+    [foodGroundBeef,foodTortilla,foodLettace,foodTomato]
+    )
+    
+// Guacamole Plate
+var plateGuacamole = new Plate(
+    'Guacamole',
+    'A traditional ground beef burrito plate.',
+    6.95,
+    [foodAvocado,foodTomato,foodLime]
+    )
+    
+// Margarita Drink
+
+var drinkMargarita = new Drink(
     'Margarita', 
     'Tequila-infused cocktail that helps you forget all your problems.', 
     10.95, 
-    [foodItem1.name,foodItem2.name]
+    [foodTequila,foodLime]
 )
 
-var plate1 = new Plate(
-    'Vegan Falafel Taco',
-    'Vegan taco with gluten-free almond-flour tortila, lettace, tomato and falafel.',
-    6.95,
-    [foodItem3,foodItem5,foodItem6,foodItem7]
+//======= END OF PLATES AND DRINKS ===========================
+
+foodRotChicken.stringify()
+foodSpicyChicken.stringify()
+foodFalafel.stringify()
+
+// PART II - STEP 3
+
+console.log('\n\n' + plateVeganFalafelTaco.name + ' is vegan: ' + plateVeganFalafelTaco.isVegan())
+console.log(plateVeganFalafelTaco.name + ' is gluten-free: ' + plateVeganFalafelTaco.isGlutenFree())
+console.log(plateVeganFalafelTaco.name + ' is citris-free: ' + plateVeganFalafelTaco.isCitrusFree())
+
+// PART II - STEP 4 -- Instantiate Burrito Plate, Guacamole Plate, and a Margarita Drink
+plateBurrito.stringify()
+plateGuacamole.stringify()
+drinkMargarita.stringify()
+
+// plateVeganFalafelTaco.stringify()
+
+// PART II - STEP 5 -- Instantiate a Menu that contains plateBurrito, plateGuacamole, drinkMargarita
+
+var menuMain = new Menu([plateBurrito,plateGuacamole,drinkMargarita])
+
+console.log(menuMain)
+
+// PART II - STEP 6
+
+var restaurantFlyingTaco = new Restaurant(
+    'Flying Taco', 
+    'Artisan foodie tacos with service so fast, the tacos fly!', 
+    [menuMain]
 )
 
+// PART II - STEP 7 - stringify the entire Restaurant!
+// *** TODO: NEED TO GET STRINGIFY to cascade from Restaurant->Menu->Plates->FoodItems
+restaurantFlyingTaco.stringify()
 
-foodItem1.stringify()
-foodItem2.stringify()
-foodItem3.stringify()
 
-drink1.stringify()
-
-console.log('\n\n' + plate1.name + ' is vegan: ' + plate1.isVegan())
-console.log(plate1.name + ' is gluten-free: ' + plate1.isGlutenFree())
-console.log(plate1.name + ' is citris-free: ' + plate1.isCitrusFree())
