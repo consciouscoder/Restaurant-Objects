@@ -104,7 +104,12 @@ class Menu {
     }
     
     stringify() {
-        this.Plate.forEach(function(){ Plate.stingify },this)
+        // this.Plate.forEach(function(element, index, array){ this.Plate[index].stingify }, this)
+        
+        // Stringify all the Plates in the array
+        for(var i = 0; i < this.Plate.length; i++) {
+            console.log(this.Plate[i].stringify())
+        }
     }
 }
 
@@ -119,7 +124,7 @@ class Restaurant {
         console.log('\n\nRestaurant Name: ' + this.name)
         console.log('\nDescription: ' + this.desc)
         
-        console.log('\nMenu: ') + this.Menu    
+        console.log('\nMenu: ') + this.Menu[0].stringify()   
     }
 }
 
@@ -269,9 +274,9 @@ console.log(plateVeganFalafelTaco.name + ' is gluten-free: ' + plateVeganFalafel
 console.log(plateVeganFalafelTaco.name + ' is citris-free: ' + plateVeganFalafelTaco.isCitrusFree())
 
 // PART II - STEP 4 -- Instantiate Burrito Plate, Guacamole Plate, and a Margarita Drink
-plateBurrito.stringify()
-plateGuacamole.stringify()
-drinkMargarita.stringify()
+// plateBurrito.stringify()
+// plateGuacamole.stringify()
+// drinkMargarita.stringify()
 
 // plateVeganFalafelTaco.stringify()
 
@@ -279,7 +284,8 @@ drinkMargarita.stringify()
 
 var menuMain = new Menu([plateBurrito,plateGuacamole,drinkMargarita])
 
-console.log(menuMain)
+//console.log(menuMain)
+menuMain.stringify()
 
 // PART II - STEP 6
 
